@@ -20,6 +20,16 @@
 				vendorHash = "sha256-ejc+3Gcp1Ax8z6CExigGgl6aXnyOiFSmA+eKWhxLDb0=";
 				subPackages = [ "./textlabel" ];
 			};
+
+			packages.printserver = pkgs.buildGoModule {
+				pname = "printserver";
+				version = "0.1.0";
+
+				src = ./.;
+
+				vendorHash = "sha256-ejc+3Gcp1Ax8z6CExigGgl6aXnyOiFSmA+eKWhxLDb0=";
+				subPackages = [ "./printserver" ];
+			};
 		}
 	);
 }
