@@ -9,11 +9,17 @@ import (
 	"strings"
 )
 
+var lprBin string
+
 func main() {
+	lprBinArg := flag.String("b", "lpr", "lpr binary")
+
 	flag.Parse()
 
 	printer := flag.Arg(0)
 	addr := flag.Arg(1)
+
+	lprBin = *lprBinArg
 
 	log.Printf("Listening on %s", addr)
 
@@ -55,7 +61,7 @@ func handle(printer string, c net.Conn) {
 }
 
 func print(printer string, data string) error {
-	cmd := exec.Command("lpr", "-P", printer, "-o", "raw")
+	cmd := exec.Command(lprBin, "-P", printer, "-o", "raw")
 	cmd.Stdin = strings.NewReader(data)
 	return cmd.Run()
 }
