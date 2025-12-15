@@ -5,8 +5,8 @@ import (
 	"io"
 	"log"
 	"net"
-	"os/exec"
-	"strings"
+
+	"github.com/hs-mb/label"
 )
 
 var lprBin string
@@ -23,7 +23,7 @@ func main() {
 
 	log.Printf("Listening on %s", addr)
 
-	l, err := net.Listen("tcp4", addr)
+	l, err := net.Listen("tcp", addr)
 	if err != nil {
 		panic(err)
 	}
@@ -54,15 +54,9 @@ func handle(printer string, c net.Conn) {
 		}
 		packet = append(packet, recv[:n]...)
 	}
-	err := print(printer, string(packet))
+	err := label.Print(printer, string(packet), lprBin)
 	if err != nil {
 		log.Printf("Print err: %v", err)
 	}
-}
-
-func print(printer string, data string) error {
-	cmd := exec.Command(lprBin, "-P", printer, "-o", "raw")
-	cmd.Stdin = strings.NewReader(data)
-	return cmd.Run()
 }
 

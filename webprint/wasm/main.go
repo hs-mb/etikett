@@ -1,7 +1,23 @@
+//go:build js && wasm
+
 package main
 
-import "fmt"
+import (
+	"strings"
+
+	"github.com/hs-mb/label/webprint/script"
+	"github.com/hs-mb/label/webprint/script/label"
+	"honnef.co/go/js/dom/v2"
+)
 
 func main() {
-	fmt.Printf("Hello, world!\n")
+	path := dom.GetWindow().Location().Pathname()
+	path = strings.TrimSuffix(path, "/")
+
+	switch path {
+	case "":
+		script.Index()
+	case "/label/raw":
+		label.Raw()
+	}
 }

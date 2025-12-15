@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/hs-mb/eplutil"
+	"github.com/hs-mb/label"
 	"golang.org/x/image/font/opentype"
 
 	_ "embed"
@@ -43,9 +44,8 @@ func main() {
 	})
 	b.Print(*n)
 
-	cmd := exec.Command("lpr", "-P", printer, "-o", "raw")
-	cmd.Stdin = strings.NewReader(b.String())
-	err := cmd.Run()
+
+	err := label.Print(printer, b.String())
 	if err != nil {
 		panic(err)
 	}

@@ -1,0 +1,31 @@
+package label
+
+import (
+	"github.com/hs-mb/label/webprint/views"
+)
+
+templ Raw() {
+	@views.Layout() {
+		@labelCreation("EPL2 direkt drucken") {
+			<textarea id="raw-input"></textarea>
+			<input type="file" id="raw-file"/>
+			<p id="raw-error"></p>
+			<button id="raw-print">Drucken</button>
+		}
+	}
+}
+
+templ Hackspace() {
+	@views.Layout() {
+		@labelCreation("Hackspace-Label drucken") {
+		}
+	}
+}
+
+templ labelCreation(title string) {
+	<div>
+		<h1>{ title }</h1>
+		<hr/>
+		{ children... }
+	</div>
+}

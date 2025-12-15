@@ -3,6 +3,8 @@
 github.com/a-h/templ
 github.com/a-h/templ/runtime
 github.com/a-h/templ/safehtml
+# github.com/gopherjs/gopherjs v1.17.2
+## explicit; go 1.17
 # github.com/hs-mb/eplutil v0.0.0-20251211143458-0b36ca57c3a0
 ## explicit; go 1.25.3
 github.com/hs-mb/eplutil
@@ -22,3 +24,4 @@ golang.org/x/text/encoding/internal/identifier
 golang.org/x/text/transform
 # honnef.co/go/js/dom/v2 v2.0.0-20250304181735-b5e52f05e89d
 ## explicit; go 1.14
+honnef.co/go/js/dom/v2
