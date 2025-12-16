@@ -14,13 +14,19 @@ func main() {
 
 	flag.Parse()
 
-	addr := flag.Arg(0)
-	wsAddr := flag.Arg(1)
-	printer = flag.Arg(2)
+	printer = flag.Arg(0)
+	tcpAddr := flag.Arg(1)
+	if tcpAddr == "" {
+		tcpAddr = "0.0.0.0:6244"
+	}
+	wsAddr := flag.Arg(2)
+	if wsAddr == "" {
+		wsAddr = "0.0.0.0:6245"
+	}
 
 	lprBin = *lprBinArg
 
-	go TCPServer(addr)
+	go TCPServer(tcpAddr)
 	go WebSocketServer(wsAddr)
 
 	select {}

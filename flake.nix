@@ -78,7 +78,7 @@
 					${pkgs.coreutils}/bin/cp "$(${pkgs.go}/bin/go env GOROOT)/lib/wasm/wasm_exec.js" ./webprint/static/wasm/wasm_exec.js
 					runwebprint() {
 						GOOS=js GOARCH=wasm ${pkgs.go}/bin/go build -o ./webprint/static/wasm/main.wasm ./webprint/wasm
-						${pkgs.go}/bin/go run -ldflags="-X main.ServeAddr=:8080 -X main.StaticDir=./webprint/static" ./webprint/server 127.0.0.1:6245
+						${pkgs.go}/bin/go run -ldflags="-X main.ServeAddr=:8080 -X main.StaticDir=./webprint/static" ./webprint/server ws://127.0.0.1:6245
 					}
 					export -f runwebprint
 					${pkgs.coreutils}/bin/echo "Watching webprint..."

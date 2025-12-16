@@ -10,7 +10,10 @@ import (
 
 func WebSocketServer(addr string) {
 	handler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		c, err := websocket.Accept(w, r, nil)
+		c, err := websocket.Accept(w, r, &websocket.AcceptOptions{
+			InsecureSkipVerify: false,
+			OriginPatterns: []string{"*"},
+		})
 		if err != nil {
 			log.Printf("WS: Failed to accept connection: %v", err)
 			return

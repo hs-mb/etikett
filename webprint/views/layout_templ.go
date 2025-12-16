@@ -8,6 +8,8 @@ package views
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+import "github.com/hs-mb/etikett/webprint"
+
 func Layout() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -29,7 +31,20 @@ func Layout() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<!doctype html><html><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><link rel=\"stylesheet\" href=\"/static/style.css\"><script src=\"/static/wasm/wasm_exec.js\"></script><script>\n\t\t\t\tconst go = new Go();\n\t\t\t\tWebAssembly.instantiateStreaming(fetch(\"/static/wasm/main.wasm\"), go.importObject).then((result) => {\n\t\t\t\t\tgo.run(result.instance);\n\t\t\t\t});\n\t\t\t</script><title>Labels</title></head><body><header><a href=\"/\">Label-Webprint</a></header><hr><main>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<!doctype html><html><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><meta name=\"print-addr\" content=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var2 string
+		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(ctx.Value(webprint.PrintAddrKey).(string))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `webprint/views/layout.templ`, Line: 11, Col: 78}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "\"><link rel=\"stylesheet\" href=\"/static/style.css\"><script src=\"/static/wasm/wasm_exec.js\"></script><script>\n\t\t\t\tconst go = new Go();\n\t\t\t\tWebAssembly.instantiateStreaming(fetch(\"/static/wasm/main.wasm\"), go.importObject).then((result) => {\n\t\t\t\t\tgo.run(result.instance);\n\t\t\t\t});\n\t\t\t</script><title>Labels</title></head><body><header><a href=\"/\">Label-Webprint</a></header><hr><main>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -37,7 +52,7 @@ func Layout() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</main><style>\n\t\t\t\theader {\n\t\t\t\t\tdisplay: flex;\n\t\t\t\t\tjustify-content: center;\n\t\t\t\t}\n\n\t\t\t\theader a {\n\t\t\t\t\tcolor: var(--light0);\n\t\t\t\t\ttext-decoration: none;\n\t\t\t\t\tfont-weight: bold;\n\t\t\t\t\tfont-size: 32pt;\n\t\t\t\t}\n\t\t\t</style></body></html>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</main><style>\n\t\t\t\theader {\n\t\t\t\t\tdisplay: flex;\n\t\t\t\t\tjustify-content: center;\n\t\t\t\t}\n\n\t\t\t\theader a {\n\t\t\t\t\tcolor: var(--light0);\n\t\t\t\t\ttext-decoration: none;\n\t\t\t\t\tfont-weight: bold;\n\t\t\t\t\tfont-size: 32pt;\n\t\t\t\t}\n\t\t\t</style></body></html>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

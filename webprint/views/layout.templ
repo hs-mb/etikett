@@ -1,11 +1,14 @@
 package views
 
+import "github.com/hs-mb/etikett/webprint"
+
 templ Layout() {
 	<!DOCTYPE html>
 	<html>
 		<head>
 			<meta charset="utf-8"/>
       <meta name="viewport" content="width=device-width, initial-scale=1"/>
+			<meta name="print-addr" content={ ctx.Value(webprint.PrintAddrKey).(string) }/>
 			<link rel="stylesheet" href="/static/style.css"/>
 			<script src="/static/wasm/wasm_exec.js"></script>
 			<script>

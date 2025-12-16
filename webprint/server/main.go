@@ -3,11 +3,10 @@ package main
 import (
 	"context"
 	"flag"
-	"io"
 	"log"
-	"net"
 	"net/http"
 
+	"github.com/hs-mb/etikett/webprint"
 	"github.com/hs-mb/etikett/webprint/views"
 	"github.com/hs-mb/etikett/webprint/views/label/hackspace"
 	"github.com/hs-mb/etikett/webprint/views/label/raw"
@@ -21,6 +20,7 @@ func main() {
 
 	printServerAddr := flag.Arg(0)
 	ctx := context.Background()
+	ctx = context.WithValue(ctx, webprint.PrintAddrKey, printServerAddr)
 
 	mux := http.NewServeMux()
 
@@ -34,27 +34,6 @@ func main() {
 	})
 	mux.HandleFunc("GET /label/hackspace", func(w http.ResponseWriter, r *http.Request) {
 		hackspace.Index().Render(ctx, w)
-	})
-
-	mux.HandleFunc("POST /label/print", func(w http.ResponseWriter, r *http.Request) {
-		conn, err := net.Dial("tcp", printServerAddr)
-		if err != nil {
-			log.Print(err)
-			return
-		}
-		body, err := io.ReadAll(r.Body)
-		if err != nil {
-			log.Print(err)
-			return
-		}
-		_, err = conn.Write(body)
-		if err != nil {
-			log.Print(err)
-			return
-		}
-		if err := conn.Close(); err != nil {
-			log.Print(err)
-		}
 	})
 
 	log.Printf("Listening on %s", ServeAddr)
