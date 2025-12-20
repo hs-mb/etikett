@@ -1,0 +1,32 @@
+package owner
+
+import (
+	"github.com/hs-mb/etikett/webprint/views"
+	"github.com/hs-mb/etikett/webprint/views/label"
+)
+
+templ Index() {
+	@views.Layout() {
+		@label.LabelCreation("Eigentums-Label drucken") {
+			<div id="owner-text" class="textarea mono" placeholder="Z.B.: Aino ..." contenteditable></div>
+			<hr/>
+			@label.Buttons() {
+				<button id="owner-print">Drucken</button>
+			}
+
+			<style>
+				#owner-text {
+					box-sizing: border-box;
+					width: 100%;
+					overflow-wrap: anywhere;
+				}
+				#owner-text:empty:before {
+					content: attr(placeholder);
+					pointer-events: none;
+					display: block;
+					color: var(--light1);
+				}
+			</style>
+		}
+	}
+}

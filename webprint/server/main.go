@@ -10,6 +10,7 @@ import (
 	"github.com/hs-mb/etikett/webprint/views"
 	"github.com/hs-mb/etikett/webprint/views/label/hackspace"
 	"github.com/hs-mb/etikett/webprint/views/label/img"
+	"github.com/hs-mb/etikett/webprint/views/label/owner"
 	"github.com/hs-mb/etikett/webprint/views/label/raw"
 )
 
@@ -35,6 +36,9 @@ func main() {
 	})
 	mux.HandleFunc("GET /label/hackspace", func(w http.ResponseWriter, r *http.Request) {
 		hackspace.Index().Render(ctx, w)
+	})
+	mux.HandleFunc("GET /label/owner", func(w http.ResponseWriter, r *http.Request) {
+		owner.Index().Render(ctx, w)
 	})
 	mux.HandleFunc("GET /label/img", func(w http.ResponseWriter, r *http.Request) {
 		img.Index().Render(ctx, w)

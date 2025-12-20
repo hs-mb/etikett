@@ -8,6 +8,7 @@ import (
 	"github.com/hs-mb/etikett/webprint/script"
 	"github.com/hs-mb/etikett/webprint/script/label/hackspace"
 	"github.com/hs-mb/etikett/webprint/script/label/img"
+	"github.com/hs-mb/etikett/webprint/script/label/owner"
 	"github.com/hs-mb/etikett/webprint/script/label/raw"
 	"honnef.co/go/js/dom/v2"
 )
@@ -21,6 +22,8 @@ func main() {
 		script.Index()
 	case "/label/hackspace":
 		hackspace.Index()
+	case "/label/owner":
+		owner.Index()
 	case "/label/raw":
 		raw.Index()
 	case "/label/img":
